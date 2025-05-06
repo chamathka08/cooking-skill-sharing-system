@@ -63,6 +63,7 @@ const HomePage = () => {
             My Kitchen
           </button>
           <button className="nav-btn logout" onClick={handleLogout}>
+    
             Leave Table
           </button>
           <button className="nav-btn explore" onClick={handleExploreClick}>
@@ -72,7 +73,7 @@ const HomePage = () => {
       </header>
 
       <section className="home-hero">
-        <h2 className="hero-title">Your Culinary Community</h2>
+        <h2 className="hero-title">Your Culinary Community..</h2>
         <p className="hero-subtitle">Connect with chefs, share skills, and savor recipes.</p>
       </section>
 

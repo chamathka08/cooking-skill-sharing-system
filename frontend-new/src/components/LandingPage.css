@@ -8,7 +8,7 @@
 
 .landing-wrapper {
   min-height: 100vh;
-  background: linear-gradient(160deg, rgb(238, 138, 81), #ca4c04 100%);
+  background: linear-gradient(160deg, rgb(242, 137, 76), #ca4c04 100%);
   color: #3E2723;
   padding: 10px;
   font-family: 'Poppins', sans-serif;
@@ -30,7 +30,7 @@
   font-size: 3rem;
   font-weight: 900;
   font-family: 'Playfair Display', serif;
-  color: #b12c04;
+  color: #d63c0d;
   text-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   letter-spacing: 0.02em;
 }
@@ -47,8 +47,8 @@
   font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
-  background: #f3ab05e7;
-  color: #3E2723;
+  background: #ffbb1bf8;
+  
   transition: all 0.3s ease;
 }
 
@@ -115,7 +115,7 @@
 
 
 .hero-image {
-  width: 350px; /* Image size */
+  width: 450px; /* Image size */
   height: auto;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -130,7 +130,7 @@
   padding: 15px 40px;
   border: none;
   border-radius: 50px;
-  background: #FF5722;
+  background: #d43303;
   color: #fff;
   font-size: 1.3rem;
   font-weight: 700;

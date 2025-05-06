@@ -29,26 +29,25 @@ const LandingPage = () => {
       Connect with chefs, share recipes, and savor new skills.
       </p>
       <div className="hero-image-container"> 
+      <img
+ src="https://images.unsplash.com/photo-1504674900247-0877df9cc836"
 
-  <img 
-  src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
-  alt="Plate of food with orange sauce"
+alt="Plate of food with orange sauce"
   className="hero-image"
-/>    
+/>
+     
       <img
   src="https://images.unsplash.com/photo-1551183053-bf91a1d81141"
   alt="Plate of food with orange sauce"
   className="hero-image"
 />
-
-
-<img
- src="https://images.unsplash.com/photo-1504674900247-0877df9cc836
-
-"
-alt="Plate of food with orange sauce"
+<img 
+  src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
+  alt="Plate of food with orange sauce"
   className="hero-image"
 />
+
+
 
 </div>
 
@@ -63,7 +62,7 @@ alt="Plate of food with orange sauce"
           <div className="feature-card">
             <div className="feature-icon">🍽️</div>
             <h3>Share Recipes</h3>
-            <p>Post your favorite dishes and inspire others.</p>
+            <p>Post your favorite dishes and inspire others..</p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">👩‍🍳</div>
