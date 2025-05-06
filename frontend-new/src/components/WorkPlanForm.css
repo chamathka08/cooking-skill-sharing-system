@@ -1,0 +1,130 @@
+.workplan-container {
+    min-height: 100vh;
+    background: linear-gradient(160deg, rgb(225, 98, 24), #eca880 100%);
+    color: #3E2723;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .workplan-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .workplan-card h2 {
+    font-size: 1.8rem;
+    color: #e74c3c;
+    margin-bottom: 20px;
+  }
+  
+  .workplan-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .workplan-input,
+  .workplan-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .workplan-input:focus,
+  .workplan-textarea:focus {
+    border-color: #e74c3c;
+    outline: none;
+  }
+  
+  .workplan-textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .workplan-submit,
+  .workplan-cancel {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .workplan-submit {
+    background: #2ecc71;
+    color: #fff;
+  }
+  
+  .workplan-submit:hover:not(:disabled) {
+    background: #ae5427;
+  }
+  
+  .workplan-submit:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+  }
+  
+  .workplan-cancel {
+    background: #e74c3c;
+    color: #fff;
+    margin-top: 10px;
+  }
+  
+  .workplan-cancel:hover {
+    background: #c0392b;
+  }
+  
+  /* Error styles */
+  .workplan-input.error,
+  .workplan-textarea.error {
+    border-color: #e74c3c;
+    background: #fff5f5;
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    text-align: left;
+  }
+  
+  @media (max-width: 480px) {
+    .workplan-card {
+      padding: 20px;
+    }
+  
+    .workplan-input,
+    .workplan-textarea {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  
+    .workplan-submit,
+    .workplan-cancel {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  
+    .error-message {
+      font-size: 0.75rem;
+    }
+  }
