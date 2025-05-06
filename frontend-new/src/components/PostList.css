@@ -1,0 +1,116 @@
+.post-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    padding: 40px 20px;
+  }
+  
+  .post-list-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a3c34;
+    margin-bottom: 30px;
+  }
+  
+  .error-message {
+    color: #d32f2f;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .loading-spinner {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #1a3c34;
+    padding: 20px;
+  }
+  
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .post-card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+  }
+  
+  .post-card h4 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #1a3c34;
+    margin: 0 0 10px;
+  }
+  
+  .post-card p {
+    font-size: 1rem;
+    color: #344e41;
+    line-height: 1.6;
+    margin: 0 0 15px;
+  }
+  
+  .post-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .edit-btn, .delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .edit-btn {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .delete-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-posts {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #5e6e66;
+    font-style: italic;
+    padding: 20px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }

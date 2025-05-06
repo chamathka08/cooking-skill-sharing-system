@@ -1,0 +1,17 @@
+.follow-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .follow-btn.follow { background: #187d1a; color: #fff; }
+  .follow-btn.unfollow { background: #e83f3f; color: #fff; }
+  
+  .follow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
