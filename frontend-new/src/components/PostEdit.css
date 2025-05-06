@@ -1,0 +1,98 @@
+.post-edit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    padding: 40px 20px;
+  }
+  
+  .post-edit-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a3c34;
+    margin-bottom: 30px;
+  }
+  
+  .post-edit-form {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a3c34;
+    margin-bottom: 8px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #1a3c34;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #2ecc71;
+    outline: none;
+  }
+  
+  .form-group input.error,
+  .form-group textarea.error {
+    border-color: #d32f2f;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .error-text {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 5px;
+  }
+  
+  .update-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .update-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loading-spinner {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #1a3c34;
+    padding: 20px;
+  }

@@ -1,0 +1,105 @@
+.login-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right,  #cb5613, #f6a474 100%);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .login-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  .login-header {
+    font-size: 2.5rem;
+    color: #dc7d0a;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+  
+  .login-subtext {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 25px;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .login-field-wrapper {
+    position: relative;
+  }
+  
+  .login-field {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+  
+  .login-field:focus {
+    border-color: #b0d2e4;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(191, 105, 8, 0.3);
+    outline: none;
+  }
+  
+  .login-field.error {
+    border-color: #ff5252;
+    background-color: #fff0f0;
+  }
+  
+  .error-text {
+    color: #ff5252;
+    font-size: 0.85em;
+    margin-top: 5px;
+    text-align: left;
+  }
+  
+  .login-submit {
+    padding: 13px;
+    background-color: #feb304;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .login-submit:hover {
+    background-color: #e76a16;
+    transform: scale(1.02);
+  }
+  
+  .login-submit:active {
+    transform: scale(1);
+  }
+  
+  /* Animation for card entrance */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
