@@ -76,7 +76,7 @@ const WorkPlanList = () => {
           ))}
         </div>
       ) : (
-        <p className="no-workplans">No work plans yet.</p>
+        <p className="no-workplans">No work plans yet appear in here.</p>
       )}
     </div>
   );
