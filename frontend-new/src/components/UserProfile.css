@@ -111,13 +111,13 @@
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   font-size: 1rem;
-  background: #fff;
+  background: #ebdddd;
   transition: border-color 0.3s ease;
 }
 
 .profile-input:focus,
 .profile-textarea:focus {
-  border-color: #8a9a5b;
+  border-color: #8bad22;
   outline: none;
 }
 
@@ -130,7 +130,7 @@
   padding: 10px;
   border: 1px dashed #dbdbdb;
   border-radius: 5px;
-  background: #f9f9f9;
+  background: #e4d6d6;
   color: #2a4066;
   cursor: pointer;
 }
