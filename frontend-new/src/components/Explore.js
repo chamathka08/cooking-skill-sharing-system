@@ -7,27 +7,26 @@ import './Explore.css';
 const Explore = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
-  const [likes, setLikes] = useState({}); // { postId: [likes] }
-  const [comments, setComments] = useState({}); // { postId: [comments] }
-  const [commentContent, setCommentContent] = useState({}); // { postId: string }
-  const [editingComment, setEditingComment] = useState(null); // Comment being edited
-  const [editContent, setEditContent] = useState(''); // Content for editing comment
+  const [likes, setLikes] = useState({});
+  const [comments, setComments] = useState({});
+  const [commentContent, setCommentContent] = useState({});
+  const [editingComment, setEditingComment] = useState(null);
+  const [editContent, setEditContent] = useState('');
   const currentUserId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const allPosts = await getAllPosts();
-        setPosts(allPosts);
+        setPosts(allPosts || []);
 
-        // Fetch likes and comments for each post
         const likesData = {};
         const commentsData = {};
-        for (const post of allPosts) {
+        for (const post of allPosts || []) {
           const postLikes = await getLikesByPostId(post.id);
-          likesData[post.id] = postLikes;
+          likesData[post.id] = postLikes || [];
           const postComments = await getCommentsByPostId(post.id);
-          commentsData[post.id] = postComments;
+          commentsData[post.id] = postComments || [];
         }
         setLikes(likesData);
         setComments(commentsData);
@@ -39,6 +38,15 @@ const Explore = () => {
   }, []);
 
   const handleLike = async (postId) => {
+    if (!currentUserId) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must be logged in to like posts.',
+        confirmButtonColor: '#8a9a5b',
+      });
+      return;
+    }
     try {
       const postLikes = likes[postId] || [];
       const hasLiked = postLikes.some(like => like.userId === currentUserId);
@@ -48,22 +56,50 @@ const Explore = () => {
         await createLike(currentUserId, postId);
       }
       const updatedLikes = await getLikesByPostId(postId);
-      setLikes(prev => ({ ...prev, [postId]: updatedLikes }));
+      setLikes(prev => ({ ...prev, [postId]: updatedLikes || [] }));
     } catch (error) {
       console.error('Error handling like:', error);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to handle like.',
+        confirmButtonColor: '#8a9a5b',
+      });
     }
   };
 
   const handleComment = async (postId) => {
+    if (!currentUserId) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must be logged in to comment.',
+        confirmButtonColor: '#8a9a5b',
+      });
+      return;
+    }
     try {
       if (commentContent[postId]?.trim()) {
         await createComment(currentUserId, postId, commentContent[postId]);
         const updatedComments = await getCommentsByPostId(postId);
-        setComments(prev => ({ ...prev, [postId]: updatedComments }));
+        setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
         setCommentContent(prev => ({ ...prev, [postId]: '' }));
+        await Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Comment added successfully.',
+          confirmButtonColor: '#8a9a5b',
+          timer: 3000,
+        });
       }
     } catch (error) {
       console.error('Error adding comment:', error);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to add comment.',
+        confirmButtonColor: '#8a9a5b',
+      });
     }
   };
 
@@ -73,44 +109,89 @@ const Explore = () => {
   };
 
   const handleUpdateComment = async (postId, commentId) => {
+    if (!currentUserId) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must be logged in to update comments.',
+        confirmButtonColor: '#8a9a5b',
+      });
+      return;
+    }
     try {
       if (editContent.trim()) {
         await updateComment(commentId, editContent);
         const updatedComments = await getCommentsByPostId(postId);
-        setComments(prev => ({ ...prev, [postId]: updatedComments }));
+        setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
         setEditingComment(null);
         setEditContent('');
+        await Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Your comment has been updated successfully.',
+          confirmButtonColor: '#8a9a5b',
+        });
       }
     } catch (error) {
       console.error('Error updating comment:', error);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to update comment.',
+        confirmButtonColor: '#8a9a5b',
+      });
     }
   };
 
   const handleDeleteComment = async (postId, commentId) => {
-    Swal.fire({
+    if (!currentUserId) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must be logged in to delete comments.',
+        confirmButtonColor: '#8a9a5b',
+      });
+      return;
+    }
+    const result = await Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#2ecc71',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#8a9a5b',
+      cancelButtonColor: '#e74c3c',
       confirmButtonText: 'Yes, delete it!',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          await deleteComment(commentId);
-          const updatedComments = await getCommentsByPostId(postId);
-          setComments(prev => ({ ...prev, [postId]: updatedComments }));
-          Swal.fire('Deleted!', 'Your comment has been deleted.', 'success');
-        } catch (error) {
-          console.error('Error deleting comment:', error);
-          Swal.fire('Error', 'Failed to delete comment.', 'error');
-        }
-      }
     });
+
+    if (result.isConfirmed) {
+      try {
+        await deleteComment(commentId);
+        const updatedComments = await getCommentsByPostId(postId);
+        setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
+        await Swal.fire({
+          icon: 'success',
+          title: 'Deleted!',
+          text: 'Your comment has been deleted.',
+          confirmButtonColor: '#8a9a5b',
+          timer: 3000,
+        });
+      } catch (error) {
+        console.error('Error deleting comment:', error);
+        await Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to delete comment.',
+          confirmButtonColor: '#8a9a5b',
+        });
+      }
+    }
   };
 
   const handleBackToHome = () => navigate('/home');
+
+  const handleUserProfile = (targetUserId) => {
+    navigate(`/profile/${targetUserId}`);
+  };
 
   return (
     <div className="explore-wrapper">
@@ -132,25 +213,52 @@ const Explore = () => {
           {posts.length > 0 ? (
             posts.map(post => (
               <div key={post.id} className="post-item">
-                {post.imageUrl ? (
-                  <img src={post.imageUrl} alt={post.title} className="post-image" />
+                <div className="post-header">
+                  <span 
+                    className="clickable-username" 
+                    onClick={() => handleUserProfile(post.userId)}
+                  >
+                    {post.username || 'Unknown'}
+                  </span>
+                  <span className="post-date">
+                    {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : 'Unknown Date'}
+                  </span>
+                </div>
+
+                {post.image ? (
+                  <img src={post.image} alt={post.title} className="post-image" />
                 ) : (
                   <div className="no-image-placeholder">No Image Available</div>
                 )}
-                <h4 className="post-title">{post.title}</h4>
-                <p className="post-description">{post.description}</p>
-                <p className="post-author">By: {post.username || 'Unknown'}</p>
 
-                {/* Like/Unlike Section */}
-                <button
-                  className={`like-btn ${likes[post.id]?.some(l => l.userId === currentUserId) ? 'liked' : ''}`}
-                  onClick={() => handleLike(post.id)}
-                >
-                  {likes[post.id]?.some(l => l.userId === currentUserId) ? 'Unlike' : 'Like'}
-                </button>
-                <p className="like-count">Likes: {likes[post.id]?.length || 0}</p>
+                <div className="post-content">
+                  <h4 className="post-title">{post.title}</h4>
+                  <p className="post-description">{post.description}</p>
+                </div>
 
-                {/* Comment Section */}
+                <div className="like-section">
+                  <button
+                    className={`like-btn ${likes[post.id]?.some(l => l.userId === currentUserId) ? 'liked' : ''}`}
+                    onClick={() => handleLike(post.id)}
+                  >
+                    {likes[post.id]?.some(l => l.userId === currentUserId) ? 'Unlike' : 'Like'}
+                  </button>
+                  <p className="like-count">Likes: {likes[post.id]?.length || 0}</p>
+                  {likes[post.id]?.length > 0 && (
+                    <div className="likes-list">
+                      {likes[post.id].map((like, index) => (
+                        <span 
+                          key={index} 
+                          className="like-username" 
+                          onClick={() => handleUserProfile(like.userId)}
+                        >
+                          {like.username}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 <div className="comment-form">
                   <input
                     type="text"
@@ -163,8 +271,7 @@ const Explore = () => {
                   </button>
                 </div>
 
-                {/* Display Comments */}
-                <div className="comments-list">
+                <div className="comments-section">
                   {comments[post.id]?.length > 0 ? (
                     comments[post.id].map(comment => (
                       <div key={comment.id} className="comment-item">
@@ -180,12 +287,22 @@ const Explore = () => {
                           </div>
                         ) : (
                           <>
+                            <div className="comment-header">
+                              <span 
+                                className="clickable-username" 
+                                onClick={() => handleUserProfile(comment.userId)}
+                              >
+                                {comment.username || 'Unknown'}
+                              </span>
+                              <span className="comment-date">
+                                {comment.createdAt ? new Date(comment.createdAt).toLocaleDateString() : 'Unknown Date'}
+                              </span>
+                            </div>
                             <p className="comment-content">{comment.content}</p>
-                            <p className="comment-author">By: {comment.userId === currentUserId ? 'You' : 'User'}</p>
                             {comment.userId === currentUserId && (
                               <div className="comment-actions">
-                                <button onClick={() => handleEditComment(comment)}>Edit</button>
-                                <button onClick={() => handleDeleteComment(post.id, comment.id)}>Delete</button>
+                                <button className="edit-btn" onClick={() => handleEditComment(comment)}>Edit</button>
+                                <button className="delete-btn" onClick={() => handleDeleteComment(post.id, comment.id)}>Delete</button>
                               </div>
                             )}
                           </>
@@ -205,7 +322,7 @@ const Explore = () => {
       </section>
 
       <footer className="explore-footer">
-        <p>© 2025 CookSphere - Fueling Culinary Creativity</p>
+        <p>© 2025 FlavorShare - Fueling Culinary Creativity</p>
       </footer>
     </div>
   );
