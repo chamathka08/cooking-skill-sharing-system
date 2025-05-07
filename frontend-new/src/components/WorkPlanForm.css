@@ -41,7 +41,7 @@
   .workplan-textarea {
     width: 100%;
     padding: 12px;
-    border: 2px solid #ddd;
+    border: 2px solid #c89f9f;
     border-radius: 10px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
@@ -79,12 +79,12 @@
   }
   
   .workplan-submit:disabled {
-    background: #95a5a6;
+    background: #73c378;
     cursor: not-allowed;
   }
   
   .workplan-cancel {
-    background: #e74c3c;
+    background: #9d1d0f;
     color: #fff;
     margin-top: 10px;
   }
