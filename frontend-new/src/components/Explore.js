@@ -38,6 +38,15 @@ const Explore = () => {
   }, []);
 
   const handleLike = async (postId) => {
+    if (!currentUserId) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must be logged in to like posts.',
+        confirmButtonColor: '#8a9a5b',
+      });
+      return;
+    }
     try {
       const postLikes = likes[postId] || [];
       const hasLiked = postLikes.some(like => like.userId === currentUserId);
@@ -60,6 +69,15 @@ const Explore = () => {
   };
 
   const handleComment = async (postId) => {
+    if (!currentUserId) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must be logged in to comment.',
+        confirmButtonColor: '#8a9a5b',
+      });
+      return;
+    }
     try {
       if (commentContent[postId]?.trim()) {
         await createComment(currentUserId, postId, commentContent[postId]);
@@ -91,6 +109,15 @@ const Explore = () => {
   };
 
   const handleUpdateComment = async (postId, commentId) => {
+    if (!currentUserId) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must be logged in to update comments.',
+        confirmButtonColor: '#8a9a5b',
+      });
+      return;
+    }
     try {
       if (editContent.trim()) {
         await updateComment(commentId, editContent);
@@ -117,6 +144,15 @@ const Explore = () => {
   };
 
   const handleDeleteComment = async (postId, commentId) => {
+    if (!currentUserId) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must be logged in to delete comments.',
+        confirmButtonColor: '#8a9a5b',
+      });
+      return;
+    }
     const result = await Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -259,14 +295,14 @@ const Explore = () => {
                                 {comment.username || 'Unknown'}
                               </span>
                               <span className="comment-date">
-                                {comment.createdAt ? new Date(post.createdAt).toLocaleDateString() : 'Unknown Date'}
+                                {comment.createdAt ? new Date(comment.createdAt).toLocaleDateString() : 'Unknown Date'}
                               </span>
                             </div>
                             <p className="comment-content">{comment.content}</p>
                             {comment.userId === currentUserId && (
                               <div className="comment-actions">
-                                <button onClick={() => handleEditComment(comment)}>Edit</button>
-                                <button onClick={() => handleDeleteComment(post.id, comment.id)}>Delete</button>
+                                <button className="edit-btn" onClick={() => handleEditComment(comment)}>Edit</button>
+                                <button className="delete-btn" onClick={() => handleDeleteComment(post.id, comment.id)}>Delete</button>
                               </div>
                             )}
                           </>

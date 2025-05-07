@@ -1,7 +1,7 @@
 /* Explore Wrapper */
 .explore-wrapper {
   min-height: 100vh;
-  background: linear-gradient(160deg, rgb(195, 82, 17), #eb905c 100%);
+  background: linear-gradient(160deg, rgb(201, 103, 47), #ca4c04 100%);
   color: #3E2723;
   padding: 20px;
   font-family: 'Poppins', sans-serif;
@@ -103,7 +103,7 @@
 }
 
 .post-item {
-  background: #fff;
+  background: #ecdac37c;
   border: 1px solid #dbdbdb;
   border-radius: 15px;
   padding: 15px;
@@ -118,20 +118,20 @@
 }
 
 .post-header .clickable-username {
-  font-size: 1rem;
+  font-size: 2rem;
   font-weight: 600;
-  color: #2a4066;
+  color: #16253d;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .post-header .clickable-username:hover {
-  color: #8a9a5b;
+  color: #23241f;
 }
 
 .post-date {
   font-size: 0.8rem;
-  color: #8a9a5b;
+  color: #1c1c1b;
 }
 
 .post-image {
@@ -161,14 +161,14 @@
 }
 
 .post-title {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #2a4066;
   margin-bottom: 5px;
 }
 
 .post-description {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #2a4066;
   margin-bottom: 10px;
 }
@@ -180,23 +180,23 @@
 
 .like-btn {
   padding: 5px 10px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #185004;
   border-radius: 5px;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  background: #fff;
-  color: #2a4066;
+  background: #0f4f08;
+  color: #cdd3d3;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 .like-btn.liked {
-  background: #e74c3c;
+  background: #c43a2b;
   color: #fff;
   border: none;
 }
 
 .like-btn:hover {
-  background: #8a9a5b;
+  background: #7c962e;
   color: #fff;
 }
 
@@ -238,19 +238,19 @@
 .comment-form input {
   flex: 1;
   padding: 8px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #641a1a;
   border-radius: 5px;
   font-size: 0.9rem;
 }
 
 .comment-btn {
   padding: 8px 16px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #0e0d0d;
   border-radius: 5px;
   font-size: 0.9rem;
   cursor: pointer;
-  background: #f5e8c7;
-  color: #2a4066;
+  background: #62983e;
+  color: #141515;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -267,7 +267,7 @@
 }
 
 .comment-item {
-  background: #f9f9f9;
+  background: #ccc8c8;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #dbdbdb;
@@ -295,7 +295,7 @@
 
 .comment-date {
   font-size: 0.8rem;
-  color: #8a9a5b;
+  color: #20211f;
 }
 
 .comment-content {
@@ -309,15 +309,33 @@
   margin-top: 5px;
 }
 
-.comment-actions button {
+.edit-btn {
   padding: 5px 12px;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   font-size: 0.8rem;
   cursor: pointer;
-  background: #fff;
-  color: #2a4066;
-  transition: background 0.3s ease, color 0.3s ease;
+  background: #8a9a5b;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+.edit-btn:hover {
+  background: #6b7a3e;
+}
+
+.delete-btn {
+  padding: 5px 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #e74c3c;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
 }
 
 .comment-actions button:hover {
@@ -346,13 +364,13 @@
   border-radius: 5px;
   font-size: 0.8rem;
   cursor: pointer;
-  background: #fff;
-  color: #2a4066;
+  background: #686563;
+  color: #ffffff;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 .edit-comment-form button:hover {
-  background: #8a9a5b;
+  background: #33762d;
   color: #fff;
 }
 
