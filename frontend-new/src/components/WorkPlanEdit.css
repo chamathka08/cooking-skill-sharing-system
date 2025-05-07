@@ -9,9 +9,9 @@
   }
   
   .workplan-edit-container h2 {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
-    color: #1a3c34;
+    color: #252726;
     margin-bottom: 30px;
   }
   
@@ -53,7 +53,7 @@
   
   .form-group input:focus,
   .form-group textarea:focus {
-    border-color: #2ecc71;
+    border-color: #0e833f;
     outline: none;
   }
   
@@ -72,11 +72,11 @@
     font-size: 0.85rem;
     margin-top: 5px;
   }
-  
+
   .update-btn {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    background:  #0c7f3c ;
     color: white;
     border: none;
     border-radius: 20px;
