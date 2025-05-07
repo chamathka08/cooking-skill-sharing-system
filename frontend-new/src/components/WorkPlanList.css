@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(160deg, rgb(238, 138, 81), #ca4c04 100%);
+    background: linear-gradient(160deg, rgb(216, 116, 58), #ca4c04 100%);
   color: #3E2723;
     padding: 40px 20px;
   }
@@ -12,7 +12,7 @@
     font-size: 3rem;
     font-weight: 700;
     color: #1a3c34;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
   
   .error-message {
@@ -33,12 +33,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
-    width: 100%;
+    width: 300%;
     max-width: 1200px;
   }
   
   .workplan-card {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(207, 64, 64, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8px);
