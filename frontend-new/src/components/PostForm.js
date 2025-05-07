@@ -105,7 +105,7 @@ const PostForm = () => {
           {errors.title && <p className="error-text">{errors.title}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">Descriptions</label>
           <textarea
             id="description"
             name="description"
