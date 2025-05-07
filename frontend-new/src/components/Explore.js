@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { getAllPosts, getLikesByPostId, createLike, deleteLike, getCommentsByPostId, createComment, updateComment, deleteComment } from '../services/api';
 import './Explore.css';
 
 const Explore = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
-  const [likes, setLikes] = useState({}); // { postId: [likes] }
-  const [comments, setComments] = useState({}); // { postId: [comments] }
+  const [likes, setLikes] = useState({}); // { postId: [{ userId, username }] }
+  const [comments, setComments] = useState({}); // { postId: [{ id, userId, username, content, createdAt }] }
   const [commentContent, setCommentContent] = useState({}); // { postId: string }
   const [editingComment, setEditingComment] = useState(null); // Comment being edited
   const [editContent, setEditContent] = useState(''); // Content for editing comment
@@ -24,9 +23,9 @@ const Explore = () => {
         const likesData = {};
         const commentsData = {};
         for (const post of allPosts) {
-          const postLikes = await getLikesByPostId(post.id);
+          const postLikes = await getLikesByPostId(post.id); // Assuming { userId, username }
           likesData[post.id] = postLikes;
-          const postComments = await getCommentsByPostId(post.id);
+          const postComments = await getCommentsByPostId(post.id); // Assuming { id, userId, username, content, createdAt }
           commentsData[post.id] = postComments;
         }
         setLikes(likesData);
@@ -87,37 +86,27 @@ const Explore = () => {
   };
 
   const handleDeleteComment = async (postId, commentId) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#2ecc71',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          await deleteComment(commentId);
-          const updatedComments = await getCommentsByPostId(postId);
-          setComments(prev => ({ ...prev, [postId]: updatedComments }));
-          Swal.fire('Deleted!', 'Your comment has been deleted.', 'success');
-        } catch (error) {
-          console.error('Error deleting comment:', error);
-          Swal.fire('Error', 'Failed to delete comment.', 'error');
-        }
-      }
-    });
+    try {
+      await deleteComment(commentId);
+      const updatedComments = await getCommentsByPostId(postId);
+      setComments(prev => ({ ...prev, [postId]: updatedComments }));
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+    }
   };
 
   const handleBackToHome = () => navigate('/home');
+
+  const handleUserProfile = (targetUserId) => {
+    navigate(`/profile/${targetUserId}`);
+  };
 
   return (
     <div className="explore-wrapper">
       <header className="explore-header">
         <div className="header-logo">
-          <span className="logo-icon">👩‍🍳</span>
-          <h1 className="logo-text">FlavorShare</h1>
+          <span className="logo-icon">🍳</span>
+          <h1 className="logo-text">CookSphere</h1>
         </div>
         <nav className="header-nav">
           <button className="nav-btn back" onClick={handleBackToHome}>
@@ -132,23 +121,55 @@ const Explore = () => {
           {posts.length > 0 ? (
             posts.map(post => (
               <div key={post.id} className="post-item">
-                {post.imageUrl ? (
-                  <img src={post.imageUrl} alt={post.title} className="post-image" />
+                {/* Post Header with Username */}
+                <div className="post-header">
+                  <span 
+                    className="clickable-username" 
+                    onClick={() => handleUserProfile(post.userId)}
+                  >
+                    {post.username || 'Unknown'}
+                  </span>
+                  <span className="post-date">
+                    {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : 'Unknown Date'}
+                  </span>
+                </div>
+
+                {/* Post Image */}
+                {post.image ? (
+                  <img src={post.image} alt={post.title} className="post-image" />
                 ) : (
                   <div className="no-image-placeholder">No Image Available</div>
                 )}
-                <h4 className="post-title">{post.title}</h4>
-                <p className="post-description">{post.description}</p>
-                <p className="post-author">By: {post.username || 'Unknown'}</p>
 
-                {/* Like/Unlike Section */}
-                <button
-                  className={`like-btn ${likes[post.id]?.some(l => l.userId === currentUserId) ? 'liked' : ''}`}
-                  onClick={() => handleLike(post.id)}
-                >
-                  {likes[post.id]?.some(l => l.userId === currentUserId) ? 'Unlike' : 'Like'}
-                </button>
-                <p className="like-count">Likes: {likes[post.id]?.length || 0}</p>
+                {/* Post Content */}
+                <div className="post-content">
+                  <h4 className="post-title">{post.title}</h4>
+                  <p className="post-description">{post.description}</p>
+                </div>
+
+                {/* Like/Unlike Section with Instagram-style Likes Display */}
+                <div className="like-section">
+                  <button
+                    className={`like-btn ${likes[post.id]?.some(l => l.userId === currentUserId) ? 'liked' : ''}`}
+                    onClick={() => handleLike(post.id)}
+                  >
+                    {likes[post.id]?.some(l => l.userId === currentUserId) ? 'Unlike' : 'Like'}
+                  </button>
+                  <p className="like-count">Likes: {likes[post.id]?.length || 0}</p>
+                  {likes[post.id]?.length > 0 && (
+                    <div className="likes-list">
+                      {likes[post.id].map((like, index) => (
+                        <span 
+                          key={index} 
+                          className="like-username" 
+                          onClick={() => handleUserProfile(like.userId)}
+                        >
+                          {like.username}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
                 {/* Comment Section */}
                 <div className="comment-form">
@@ -180,8 +201,18 @@ const Explore = () => {
                           </div>
                         ) : (
                           <>
+                            <div className="comment-header">
+                              <span 
+                                className="clickable-username" 
+                                onClick={() => handleUserProfile(comment.userId)}
+                              >
+                                {comment.userId === currentUserId ? 'You' : comment.username || 'User'}
+                              </span>
+                              <span className="comment-date">
+                                {comment.createdAt ? new Date(comment.createdAt).toLocaleDateString() : 'Unknown Date'}
+                              </span>
+                            </div>
                             <p className="comment-content">{comment.content}</p>
-                            <p className="comment-author">By: {comment.userId === currentUserId ? 'You' : 'User'}</p>
                             {comment.userId === currentUserId && (
                               <div className="comment-actions">
                                 <button onClick={() => handleEditComment(comment)}>Edit</button>

@@ -1,91 +1,202 @@
 .post-form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-    padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #2a4066 0%, #4a6a8a 100%); /* Deep navy to slate blue gradient */
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.post-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') repeat; /* Wooden table texture */
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.post-form-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/herringbone.png') repeat; /* Herb-inspired pattern */
+  opacity: 0.1;
+  z-index: 1;
+}
+
+h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #f5e8c7; /* Creamy beige */
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 10px rgba(245, 232, 199, 0.5);
+  animation: fadeInDown 1s ease-out;
+}
+
+.post-form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+  border: 2px solid #8a9a5b; /* Herb green border */
+  position: relative;
+  z-index: 2;
+  animation: slideUp 1s ease-out;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+label {
+  display: block;
+  font-size: 1.1rem;
+  color: #2a4066;
+  margin-bottom: 8px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e7f7;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #2a4066;
+  background: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+  border-color: #8a9a5b;
+  box-shadow: 0 0 10px rgba(138, 154, 91, 0.3);
+  outline: none;
+}
+
+input.error,
+textarea.error {
+  border-color: #dc3545;
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  animation: shake 0.5s ease;
+}
+
+.image-preview {
+  max-width: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.8s ease-out;
+  object-fit: cover;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #8a9a5b 0%, #6b8e23 100%); /* Herb green gradient */
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 5px 20px rgba(138, 154, 91, 0.4);
+}
+
+.submit-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #6b8e23 0%, #8a9a5b 100%);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  .post-form-container h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1a3c34;
-    margin-bottom: 30px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2.2rem;
+  }
+
   .post-form {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 30px;
-    width: 100%;
-    max-width: 500px;
+    padding: 20px;
+    margin: 0 10px;
   }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #1a3c34;
-    margin-bottom: 8px;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
     padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: #1a3c34;
-    transition: border-color 0.3s ease;
   }
-  
-  .form-group input:focus,
-  .form-group textarea:focus {
-    border-color: #2ecc71;
-    outline: none;
-  }
-  
-  .form-group input.error,
-  .form-group textarea.error {
-    border-color: #d32f2f;
-  }
-  
-  .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
-  .error-text {
-    color: #d32f2f;
-    font-size: 0.85rem;
-    margin-top: 5px;
-  }
-  
+
   .submit-btn {
-    width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.1rem;
   }
-  
-  .submit-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
+}

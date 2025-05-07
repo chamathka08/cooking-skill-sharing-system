@@ -67,7 +67,9 @@ const PostList = () => {
           {posts.map((post) => (
             <div key={post.id} className="post-card">
               <h4>{post.title}</h4>
+              {post.image && <img src={post.image} alt={post.title} className="post-image" />}
               <p>{post.description}</p>
+              <p><small>Created: {new Date(post.createdAt).toLocaleDateString()}</small></p>
               <div className="post-actions">
                 <button onClick={() => handleEdit(post.id)} className="edit-btn">Edit</button>
                 <button onClick={() => handleDelete(post.id)} className="delete-btn">Delete</button>
