@@ -8,7 +8,8 @@
 
 .profile-container {
   min-height: 100vh;
-  background: #fafafa; /* Instagram's light gray background */
+  background: linear-gradient(160deg, rgb(242, 137, 76), #ca4c04 100%);
+  color: #3E2723;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -20,10 +21,10 @@
   display: flex;
   align-items: flex-start;
   width: 100%;
-  max-width: 900px;
-  padding: 20px;
-  background: #fff;
-  border-bottom: 1px solid #dbdbdb;
+  max-width: 2000px;
+  padding: 8px;
+  background: #d26919;
+  border-bottom: 1px solid #bd7f14;
 }
 
 .profile-avatar {
@@ -32,11 +33,11 @@
   border-radius: 50%;
   overflow: hidden;
   margin-right: 30px;
-  border: 2px solid #8a9a5b; /* Herb green border */
+  border: 2px solid #daa00e; /* Herb green border */
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #2a4066; /* Deep navy fallback */
+  background: #151a22; /* Deep navy fallback */
   font-size: 3rem;
   color: #f5e8c7;
   font-weight: bold;
@@ -62,7 +63,7 @@
 .profile-top-row h2 {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #2a4066;
+  color: #161616;
   margin-right: 20px;
 }
 
@@ -90,7 +91,7 @@
 }
 
 .profile-email {
-  color: #8a9a5b;
+  color: #21211e;
   font-size: 0.9rem;
   margin-top: 5px;
 }
@@ -179,27 +180,27 @@
 }
 
 .profile-btn.create-workplan {
-  background: #f5e8c7;
+  background: #cc9918;
   color: #2a4066;
 }
 
 .profile-btn.view-workplan {
-  background: #f5e8c7;
+  background: #c26e25;
   color: #2a4066;
 }
 
 .profile-btn.add-post {
-  background: #f5e8c7;
+  background: #e6bc14;
   color: #2a4066;
 }
 
 .profile-btn.view-posts {
-  background: #f5e8c7;
+  background: #efddb1;
   color: #2a4066;
 }
 
 .profile-btn.home {
-  background: #f5e8c7;
+  background: #49d005;
   color: #2a4066;
 }
 
@@ -225,9 +226,12 @@
 .post-item {
   position: relative;
   aspect-ratio: 1;
-  background: #dbdbdb;
+  background: rgba(200, 200, 200, 0.85); /* Ash color with transparency */
   overflow: hidden;
   cursor: pointer;
+  border-radius: 8px; /* Smooth edges */
+  border: 1px solid rgba(219, 219, 219, 0.5); /* Semi-transparent border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .post-image {
@@ -242,7 +246,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #2a4066;
+  background: rgba(42, 64, 102, 0.85); /* Adjusted for transparency, matching original color */
   color: #f5e8c7;
   font-size: 2rem;
   font-weight: bold;
@@ -254,7 +258,7 @@
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: #c2bdbd;
   padding: 5px;
   font-size: 0.9rem;
   opacity: 0;
