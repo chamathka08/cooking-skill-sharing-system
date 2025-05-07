@@ -309,20 +309,34 @@
   margin-top: 5px;
 }
 
-.comment-actions button {
+.edit-btn {
   padding: 5px 12px;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   font-size: 0.8rem;
   cursor: pointer;
-  background: #fff;
-  color: #2a4066;
-  transition: background 0.3s ease, color 0.3s ease;
+  background: #2ecc71; /* Green color for edit button */
+  color: #fff;
+  transition: background 0.3s ease;
 }
 
-.comment-actions button:hover {
-  background: #e74c3c;
+.edit-btn:hover {
+  background: #27ae60; /* Darker green on hover */
+}
+
+.delete-btn {
+  padding: 5px 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #e74c3c; /* Red color for delete button */
   color: #fff;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #c0392b; /* Darker red on hover */
 }
 
 .edit-comment-form {
@@ -347,12 +361,12 @@
   font-size: 0.8rem;
   cursor: pointer;
   background: #034904;
-  color: #2a4066;
+  color: #078218;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 .edit-comment-form button:hover {
-  background: #aa0b0b;
+  background: #a81818;
   color: #fff;
 }
 

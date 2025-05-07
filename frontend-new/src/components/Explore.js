@@ -228,7 +228,7 @@ const Explore = () => {
                 {post.image ? (
                   <img src={post.image} alt={post.title} className="post-image" />
                 ) : (
-                  <div className="no-image-placeholder">No Image Available</div>
+                  <div className="no-image-placeholder">No Image Available..</div>
                 )}
 
                 <div className="post-content">
