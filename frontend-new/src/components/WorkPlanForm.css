@@ -21,7 +21,7 @@
   
   .workplan-card h2 {
     font-size: 1.8rem;
-    color: #e74c3c;
+    color: #ef2a14;
     margin-bottom: 20px;
   }
   
@@ -79,7 +79,7 @@
   }
   
   .workplan-submit:disabled {
-    background: #95a5a6;
+    background: #9cd9a1;
     cursor: not-allowed;
   }
   
