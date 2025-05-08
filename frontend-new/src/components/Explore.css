@@ -108,6 +108,8 @@
   border-radius: 15px;
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .post-header {
@@ -135,7 +137,7 @@
 }
 
 .post-image {
-  width: 50%;
+  width: 40%;
   max-height: 400px;
   object-fit: cover;
   border-radius: 5px;
@@ -264,6 +266,35 @@
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
+  max-height: 200px; /* Fixed height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top: auto; /* Push to bottom of post */
+  padding-right: 5px; /* Space for scrollbar */
+}
+
+/* Scrollbar Styling */
+.comments-section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.comments-section::-webkit-scrollbar-track {
+  background: #d1d1d1; /* Light gray track */
+  border-radius: 5px;
+}
+
+.comments-section::-webkit-scrollbar-thumb {
+  background: #a0a0a0; /* Subtle gray thumb */
+  border-radius: 5px;
+}
+
+.comments-section::-webkit-scrollbar-thumb:hover {
+  background: #888; /* Slightly darker on hover */
+}
+
+/* Cross-browser scrollbar styling */
+.comments-section {
+  scrollbar-color: #a0a0a0 #d1d1d1; /* Thumb and track colors */
+  scrollbar-width: thin; /* Thin scrollbar for Firefox */
 }
 
 .comment-item {
@@ -307,6 +338,8 @@
   display: flex;
   gap: 8px;
   margin-top: 5px;
+  visibility: visible;
+  min-height: 30px;
 }
 
 .edit-btn {
@@ -319,6 +352,7 @@
   color: #fff;
   transition: background 0.3s ease;
 }
+
 .edit-btn:hover {
   background: #6b7a3e;
 }
