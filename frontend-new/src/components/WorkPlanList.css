@@ -85,17 +85,17 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 10px 20px;
+  padding: 14px 28px;
   border: none;
   border-radius: 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 500;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .edit-btn {
-  background: linear-gradient(135deg, #69c007 0%, #119b1c 100%);
+  background: #119b1c !important;
   color: white;
 }
 
@@ -147,8 +147,8 @@
 
   .edit-btn,
   .delete-btn {
-    padding: 8px 16px;
-    font-size: 0.9rem;
+    padding: 12px 24px;
+    font-size: 1rem;
   }
 
   .workplan-actions {
@@ -172,6 +172,12 @@
 
   .workplan-card {
     padding-bottom: 40px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
   }
 
   .workplan-actions {
