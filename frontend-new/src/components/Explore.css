@@ -392,19 +392,35 @@
   font-size: 0.9rem;
 }
 
-.edit-comment-form button {
+.edit-comment-form .save-btn {
   padding: 5px 12px;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   font-size: 0.8rem;
   cursor: pointer;
-  background: #686563;
-  color: #ffffff;
+  background: #8a9a5b;
+  color: #fff;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.edit-comment-form button:hover {
-  background: #33762d;
+.edit-comment-form .save-btn:hover {
+  background: #6b7a3e;
+  color: #fff;
+}
+
+.edit-comment-form .cancel-btn {
+  padding: 5px 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #e74c3c;
+  color: #fff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.edit-comment-form .cancel-btn:hover {
+  background: #c0392b;
   color: #fff;
 }
 
@@ -466,7 +482,8 @@
     width: 100%;
   }
 
-  .edit-comment-form button {
+  .edit-comment-form .save-btn,
+  .edit-comment-form .cancel-btn {
     width: 100%;
   }
 
