@@ -235,14 +235,22 @@
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
+  align-items: flex-start;
+}
+
+.comment-input-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .comment-form input {
-  flex: 1;
   padding: 8px;
   border: 1px solid #641a1a;
   border-radius: 5px;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 .comment-btn {
@@ -259,6 +267,16 @@
 .comment-btn:hover {
   background: #8a9a5b;
   color: #fff;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.error-message p {
+  margin: 0;
 }
 
 .comments-section {
@@ -315,7 +333,7 @@
 .comment-header .clickable-username {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #2a4066;
+  color: #662a60;
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -381,15 +399,19 @@
   display: flex;
   gap: 8px;
   margin-top: 5px;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.edit-comment-form .comment-input-wrapper {
+  flex: 1;
 }
 
 .edit-comment-form input {
-  flex: 1;
   padding: 8px;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 .edit-comment-form .save-btn {
@@ -464,6 +486,10 @@
 
   .comment-form {
     flex-direction: column;
+  }
+
+  .comment-input-wrapper {
+    width: 100%;
   }
 
   .comment-form input {
