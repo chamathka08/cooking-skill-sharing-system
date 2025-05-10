@@ -103,7 +103,7 @@
 }
 
 .post-item {
-  background: #ecdac37c;
+  background: #ede1d07c;
   border: 1px solid #dbdbdb;
   border-radius: 15px;
   padding: 15px;
@@ -131,7 +131,14 @@
   color: #23241f;
 }
 
-.post-date {
+.post-username-placeholder,
+.comment-username-placeholder {
+  width: 100px; /* Placeholder width to maintain layout */
+  height: 1.5rem;
+}
+
+.post-date,
+.comment-date {
   font-size: 0.8rem;
   color: #1c1c1b;
 }
@@ -235,14 +242,22 @@
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
+  align-items: flex-start;
+}
+
+.comment-input-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .comment-form input {
-  flex: 1;
   padding: 8px;
   border: 1px solid #641a1a;
   border-radius: 5px;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 .comment-btn {
@@ -259,6 +274,16 @@
 .comment-btn:hover {
   background: #8a9a5b;
   color: #fff;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.error-message p {
+  margin: 0;
 }
 
 .comments-section {
@@ -354,7 +379,7 @@
 }
 
 .edit-btn:hover {
-  background: #6b7a3e;
+  background: #7c962e;
 }
 
 .delete-btn {
@@ -381,30 +406,50 @@
   display: flex;
   gap: 8px;
   margin-top: 5px;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.edit-comment-form .comment-input-wrapper {
+  flex: 1;
 }
 
 .edit-comment-form input {
-  flex: 1;
   padding: 8px;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   font-size: 0.9rem;
+  width: 100%;
 }
 
-.edit-comment-form button {
+.edit-comment-form .save-btn {
   padding: 5px 12px;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   font-size: 0.8rem;
   cursor: pointer;
-  background: #686563;
-  color: #ffffff;
+  background: #8a9a5b;
+  color: #fff;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.edit-comment-form button:hover {
-  background: #33762d;
+.edit-comment-form .save-btn:hover {
+  background: #6b7a3e;
+  color: #fff;
+}
+
+.edit-comment-form .cancel-btn {
+  padding: 5px 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #e74c3c;
+  color: #fff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.edit-comment-form .cancel-btn:hover {
+  background: #c0392b;
   color: #fff;
 }
 
@@ -450,6 +495,10 @@
     flex-direction: column;
   }
 
+  .comment-input-wrapper {
+    width: 100%;
+  }
+
   .comment-form input {
     width: 100%;
   }
@@ -466,7 +515,8 @@
     width: 100%;
   }
 
-  .edit-comment-form button {
+  .edit-comment-form .save-btn,
+  .edit-comment-form .cancel-btn {
     width: 100%;
   }
 

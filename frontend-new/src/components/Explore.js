@@ -10,6 +10,7 @@ const Explore = () => {
   const [likes, setLikes] = useState({});
   const [comments, setComments] = useState({});
   const [commentContent, setCommentContent] = useState({});
+  const [commentErrors, setCommentErrors] = useState({});
   const [editingComment, setEditingComment] = useState(null);
   const [editContent, setEditContent] = useState('');
   const currentUserId = localStorage.getItem('userId');
@@ -36,6 +37,27 @@ const Explore = () => {
     };
     fetchPosts();
   }, []);
+
+  const validateComment = (content, postId) => {
+    const errors = [];
+    const trimmedContent = content?.trim() || '';
+
+    // Required field
+    if (!trimmedContent) {
+      errors.push('Comment cannot be empty.');
+    }
+
+    // Length constraints
+    if (trimmedContent.length < 3) {
+      errors.push('Comment must be at least 3 characters long.');
+    }
+    if (trimmedContent.length > 500) {
+      errors.push('Comment cannot exceed 500 characters.');
+    }
+
+    setCommentErrors(prev => ({ ...prev, [postId]: errors }));
+    return errors.length === 0;
+  };
 
   const handleLike = async (postId) => {
     if (!currentUserId) {
@@ -79,19 +101,22 @@ const Explore = () => {
       return;
     }
     try {
-      if (commentContent[postId]?.trim()) {
-        await createComment(currentUserId, postId, commentContent[postId]);
-        const updatedComments = await getCommentsByPostId(postId);
-        setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
-        setCommentContent(prev => ({ ...prev, [postId]: '' }));
-        await Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Comment added successfully.',
-          confirmButtonColor: '#8a9a5b',
-          timer: 3000,
-        });
+      const content = commentContent[postId] || '';
+      if (!validateComment(content, postId)) {
+        return;
       }
+      await createComment(currentUserId, postId, content.trim());
+      const updatedComments = await getCommentsByPostId(postId);
+      setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
+      setCommentContent(prev => ({ ...prev, [postId]: '' }));
+      setCommentErrors(prev => ({ ...prev, [postId]: [] }));
+      await Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Comment added successfully.',
+        confirmButtonColor: '#8a9a5b',
+        timer: 3000,
+      });
     } catch (error) {
       console.error('Error adding comment:', error);
       await Swal.fire({
@@ -119,19 +144,21 @@ const Explore = () => {
       return;
     }
     try {
-      if (editContent.trim()) {
-        await updateComment(commentId, editContent);
-        const updatedComments = await getCommentsByPostId(postId);
-        setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
-        setEditingComment(null);
-        setEditContent('');
-        await Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Your comment has been updated successfully.',
-          confirmButtonColor: '#8a9a5b',
-        });
+      if (!validateComment(editContent, postId)) {
+        return;
       }
+      await updateComment(commentId, editContent.trim());
+      const updatedComments = await getCommentsByPostId(postId);
+      setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
+      setEditingComment(null);
+      setEditContent('');
+      setCommentErrors(prev => ({ ...prev, [postId]: [] }));
+      await Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Your comment has been updated successfully.',
+        confirmButtonColor: '#8a9a5b',
+      });
     } catch (error) {
       console.error('Error updating comment:', error);
       await Swal.fire({
@@ -208,7 +235,7 @@ const Explore = () => {
       </header>
 
       <section className="posts-section">
-        <h3 className="posts-title">Explore Skill-Sharing Posts</h3>
+        <h3 className="posts-title">Explore Skill-Sharing Posts..</h3>
         <div className="posts-list">
           {posts.length > 0 ? (
             posts.map(post => (
@@ -260,12 +287,24 @@ const Explore = () => {
                 </div>
 
                 <div className="comment-form">
-                  <input
-                    type="text"
-                    placeholder="Add a comment..."
-                    value={commentContent[post.id] || ''}
-                    onChange={(e) => setCommentContent(prev => ({ ...prev, [post.id]: e.target.value }))}
-                  />
+                  <div className="comment-input-wrapper">
+                    <input
+                      type="text"
+                      placeholder="Add a comment..."
+                      value={commentContent[post.id] || ''}
+                      onChange={(e) => {
+                        setCommentContent(prev => ({ ...prev, [post.id]: e.target.value }));
+                        validateComment(e.target.value, post.id);
+                      }}
+                    />
+                    {commentErrors[post.id]?.length > 0 && (
+                      <div className="error-message">
+                        {commentErrors[post.id].map((error, index) => (
+                          <p key={index}>{error}</p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <button className="comment-btn" onClick={() => handleComment(post.id)}>
                     Comment
                   </button>
@@ -277,13 +316,25 @@ const Explore = () => {
                       <div key={comment.id} className="comment-item">
                         {editingComment === comment.id ? (
                           <div className="edit-comment-form">
-                            <input
-                              type="text"
-                              value={editContent}
-                              onChange={(e) => setEditContent(e.target.value)}
-                            />
-                            <button onClick={() => handleUpdateComment(post.id, comment.id)}>Save</button>
-                            <button onClick={() => setEditingComment(null)}>Cancel</button>
+                            <div className="comment-input-wrapper">
+                              <input
+                                type="text"
+                                value={editContent}
+                                onChange={(e) => {
+                                  setEditContent(e.target.value);
+                                  validateComment(e.target.value, post.id);
+                                }}
+                              />
+                              {commentErrors[post.id]?.length > 0 && (
+                                <div className="error-message">
+                                  {commentErrors[post.id].map((error, index) => (
+                                    <p key={index}>{error}</p>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                            <button className="save-btn" onClick={() => handleUpdateComment(post.id, comment.id)}>Save</button>
+                            <button className="cancel-btn" onClick={() => setEditingComment(null)}>Cancel</button>
                           </div>
                         ) : (
                           <>
