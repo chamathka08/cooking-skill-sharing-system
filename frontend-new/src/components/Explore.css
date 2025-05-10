@@ -103,7 +103,7 @@
 }
 
 .post-item {
-  background: #ecdac37c;
+  background: #ede1d07c;
   border: 1px solid #dbdbdb;
   border-radius: 15px;
   padding: 15px;
@@ -354,7 +354,7 @@
 }
 
 .edit-btn:hover {
-  background: #6b7a3e;
+  background: #7c962e;
 }
 
 .delete-btn {
