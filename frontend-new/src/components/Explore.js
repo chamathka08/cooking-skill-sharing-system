@@ -282,8 +282,8 @@ const Explore = () => {
                               value={editContent}
                               onChange={(e) => setEditContent(e.target.value)}
                             />
-                            <button onClick={() => handleUpdateComment(post.id, comment.id)}>Save</button>
-                            <button onClick={() => setEditingComment(null)}>Cancel</button>
+                            <button className="save-btn" onClick={() => handleUpdateComment(post.id, comment.id)}>Save</button>
+                            <button className="cancel-btn" onClick={() => setEditingComment(null)}>Cancel</button>
                           </div>
                         ) : (
                           <>
