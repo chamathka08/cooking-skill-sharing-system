@@ -19,26 +19,20 @@ const Explore = () => {
     const fetchPosts = async () => {
       try {
         const allPosts = await getAllPosts();
-        setPosts(Array.isArray(allPosts) ? allPosts : []);
+        setPosts(allPosts || []);
 
         const likesData = {};
         const commentsData = {};
         for (const post of allPosts || []) {
           const postLikes = await getLikesByPostId(post.id);
-          likesData[post.id] = Array.isArray(postLikes) ? postLikes : [];
+          likesData[post.id] = postLikes || [];
           const postComments = await getCommentsByPostId(post.id);
-          commentsData[post.id] = Array.isArray(postComments) ? postComments : [];
+          commentsData[post.id] = postComments || [];
         }
         setLikes(likesData);
         setComments(commentsData);
       } catch (error) {
         console.error('Error fetching posts:', error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Failed to load posts.',
-          confirmButtonColor: '#8a9a5b',
-        });
       }
     };
     fetchPosts();
@@ -84,7 +78,7 @@ const Explore = () => {
         await createLike(currentUserId, postId);
       }
       const updatedLikes = await getLikesByPostId(postId);
-      setLikes(prev => ({ ...prev, [postId]: Array.isArray(updatedLikes) ? updatedLikes : [] }));
+      setLikes(prev => ({ ...prev, [postId]: updatedLikes || [] }));
     } catch (error) {
       console.error('Error handling like:', error);
       await Swal.fire({
@@ -106,16 +100,14 @@ const Explore = () => {
       });
       return;
     }
-
-    const content = commentContent[postId] || '';
-    if (!validateComment(content, postId)) {
-      return;
-    }
-
     try {
+      const content = commentContent[postId] || '';
+      if (!validateComment(content, postId)) {
+        return;
+      }
       await createComment(currentUserId, postId, content.trim());
       const updatedComments = await getCommentsByPostId(postId);
-      setComments(prev => ({ ...prev, [postId]: Array.isArray(updatedComments) ? updatedComments : [] }));
+      setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
       setCommentContent(prev => ({ ...prev, [postId]: '' }));
       setCommentErrors(prev => ({ ...prev, [postId]: [] }));
       await Swal.fire({
@@ -138,7 +130,7 @@ const Explore = () => {
 
   const handleEditComment = (comment) => {
     setEditingComment(comment.id);
-    setEditContent(comment.content || '');
+    setEditContent(comment.content);
   };
 
   const handleUpdateComment = async (postId, commentId) => {
@@ -151,15 +143,13 @@ const Explore = () => {
       });
       return;
     }
-
-    if (!validateComment(editContent, postId)) {
-      return;
-    }
-
     try {
+      if (!validateComment(editContent, postId)) {
+        return;
+      }
       await updateComment(commentId, editContent.trim());
       const updatedComments = await getCommentsByPostId(postId);
-      setComments(prev => ({ ...prev, [postId]: Array.isArray(updatedComments) ? updatedComments : [] }));
+      setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
       setEditingComment(null);
       setEditContent('');
       setCommentErrors(prev => ({ ...prev, [postId]: [] }));
@@ -204,7 +194,7 @@ const Explore = () => {
       try {
         await deleteComment(commentId);
         const updatedComments = await getCommentsByPostId(postId);
-        setComments(prev => ({ ...prev, [postId]: Array.isArray(updatedComments) ? updatedComments : [] }));
+        setComments(prev => ({ ...prev, [postId]: updatedComments || [] }));
         await Swal.fire({
           icon: 'success',
           title: 'Deleted!',
@@ -227,9 +217,7 @@ const Explore = () => {
   const handleBackToHome = () => navigate('/home');
 
   const handleUserProfile = (targetUserId) => {
-    if (targetUserId) {
-      navigate(`/profile/${targetUserId}`);
-    }
+    navigate(`/profile/${targetUserId}`);
   };
 
   return (
@@ -253,18 +241,14 @@ const Explore = () => {
             posts.map(post => (
               <div key={post.id} className="post-item">
                 <div className="post-header">
-                  {post.userId && post.username ? (
-                    <span 
-                      className="clickable-username" 
-                      onClick={() => handleUserProfile(post.userId)}
-                    >
-                      {post.username}
-                    </span>
-                  ) : (
-                    <span className="post-username-placeholder"></span>
-                  )}
+                  <span 
+                    className="clickable-username" 
+                    onClick={() => handleUserProfile(post.userId)}
+                  >
+                    {post.username || 'Unknown'}
+                  </span>
                   <span className="post-date">
-                    {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}
+                    {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : 'Unknown Date'}
                   </span>
                 </div>
 
@@ -295,7 +279,7 @@ const Explore = () => {
                           className="like-username" 
                           onClick={() => handleUserProfile(like.userId)}
                         >
-                          {like.username || ''}
+                          {like.username}
                         </span>
                       ))}
                     </div>
@@ -355,21 +339,17 @@ const Explore = () => {
                         ) : (
                           <>
                             <div className="comment-header">
-                              {comment.userId && comment.username ? (
-                                <span 
-                                  className="clickable-username" 
-                                  onClick={() => handleUserProfile(comment.userId)}
-                                >
-                                  {comment.username}
-                                </span>
-                              ) : (
-                                <span className="comment-username-placeholder"></span>
-                              )}
+                              <span 
+                                className="clickable-username" 
+                                onClick={() => handleUserProfile(comment.userId)}
+                              >
+                                {comment.username || 'Unknown'}
+                              </span>
                               <span className="comment-date">
-                                {comment.createdAt ? new Date(comment.createdAt).toLocaleDateString() : ''}
+                                {comment.createdAt ? new Date(comment.createdAt).toLocaleDateString() : 'Unknown Date'}
                               </span>
                             </div>
-                            <p className="comment-content">{comment.content || ''}</p>
+                            <p className="comment-content">{comment.content}</p>
                             {comment.userId === currentUserId && (
                               <div className="comment-actions">
                                 <button className="edit-btn" onClick={() => handleEditComment(comment)}>Edit</button>
