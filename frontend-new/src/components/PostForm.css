@@ -38,7 +38,7 @@
 h2 {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #f5e8c7; /* Creamy beige */
+  color: #0b0c0e; /* Creamy beige */
   text-align: center;
   margin-bottom: 30px;
   text-shadow: 2px 2px 10px rgba(245, 232, 199, 0.5);
@@ -124,7 +124,7 @@ textarea.error {
   font-size: 1.2rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(90deg, #8a9a5b 0%, #6b8e23 100%); /* Herb green gradient */
+  background: linear-gradient(90deg, #78902f 0%, #6b8e23 100%); /* Herb green gradient */
   cursor: pointer;
   transition: transform 0.3s ease, background 0.3s ease;
   box-shadow: 0 5px 20px rgba(138, 154, 91, 0.4);
