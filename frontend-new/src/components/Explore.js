@@ -208,7 +208,7 @@ const Explore = () => {
       </header>
 
       <section className="posts-section">
-        <h3 className="posts-title">Explore Skill-Sharing Posts</h3>
+        <h3 className="posts-title">Explore Skill-Sharing Posts..</h3>
         <div className="posts-list">
           {posts.length > 0 ? (
             posts.map(post => (
@@ -228,7 +228,7 @@ const Explore = () => {
                 {post.image ? (
                   <img src={post.image} alt={post.title} className="post-image" />
                 ) : (
-                  <div className="no-image-placeholder">No Image Available..</div>
+                  <div className="no-image-placeholder">No Image Available</div>
                 )}
 
                 <div className="post-content">
