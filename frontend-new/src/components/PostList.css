@@ -44,6 +44,7 @@
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 20px;
+  padding-bottom: 40px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -77,9 +78,9 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 24px;
+  border-radius: 20px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -87,7 +88,7 @@
 }
 
 .edit-btn {
-  background: #119b1c !important;
+  background: linear-gradient(135deg, #049530 0%, #0dac27 100%);
   color: white;
 }
 
@@ -125,9 +126,8 @@
 
   .edit-btn,
   .delete-btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
     font-size: 0.9rem;
-    border-radius: 20px;
   }
 }
 
@@ -147,8 +147,7 @@
 
   .edit-btn,
   .delete-btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
     font-size: 0.9rem;
-    border-radius: 20px;
   }
 }
