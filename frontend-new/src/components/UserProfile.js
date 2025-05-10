@@ -22,7 +22,7 @@ const UserProfile = () => {
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [postInteractions, setPostInteractions] = useState({}); // Store likes and comments with usernames
+  const [postInteractions, setPostInteractions] = useState({});
   const isOwnProfile = !userId || userId === currentUserId;
 
   useEffect(() => {
@@ -45,11 +45,10 @@ const UserProfile = () => {
         const userPosts = await getPostsByUserId(targetId);
         setPosts(userPosts);
 
-        // Fetch likes and comments with usernames for each post
         const interactions = {};
         for (const post of userPosts) {
-          const likes = await getLikesByPostId(post.id); // Assuming { id, username, postId }
-          const comments = await getCommentsByPostId(post.id); // Assuming { id, username, comment }
+          const likes = await getLikesByPostId(post.id);
+          const comments = await getCommentsByPostId(post.id);
           interactions[post.id] = {
             likes: likes.map(like => like.username),
             comments: comments
@@ -116,6 +115,18 @@ const UserProfile = () => {
     }
   };
 
+  const handleCancel = () => {
+    setFormData({
+      username: user.username,
+      email: user.email,
+      password: '',
+      bio: user.bio || '',
+      profilePicture: user.profilePicture || '',
+    });
+    setPreview(user.profilePicture || null);
+    setIsEditing(false);
+  };
+
   const handleDelete = async () => {
     const result = await Swal.fire({
       icon: 'warning',
@@ -142,7 +153,6 @@ const UserProfile = () => {
   const handleAddPost = () => navigate('/post/create');
   const handleViewPosts = () => navigate('/post/list');
 
-  // Handle navigation to user profile
   const handleUserProfile = (targetUserId) => {
     navigate(`/profile/${targetUserId}`);
   };
@@ -163,9 +173,22 @@ const UserProfile = () => {
           <div className="profile-top-row">
             <h2>{user.username}</h2>
             {isOwnProfile ? (
-              <button className="profile-btn edit" onClick={handleUpdate}>
-                {isEditing ? 'Save Changes' : 'Edit Profile'}
-              </button>
+              <div className="profile-btn-group">
+                {isEditing ? (
+                  <>
+                    <button className="profile-btn edit" onClick={handleUpdate}>
+                      Save Changes
+                    </button>
+                    <button className="profile-btn cancel" onClick={handleCancel}>
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <button className="profile-btn edit" onClick={handleUpdate}>
+                    Edit Profile
+                  </button>
+                )}
+              </div>
             ) : (
               <FollowButton currentUserId={currentUserId} targetUserId={user.id} />
             )}
@@ -272,7 +295,7 @@ const UserProfile = () => {
                           <span 
                             key={index} 
                             className="like-username" 
-                            onClick={() => handleUserProfile(username)} // Navigate to user profile
+                            onClick={() => handleUserProfile(username)}
                           >
                             {username}
                           </span>
@@ -289,7 +312,7 @@ const UserProfile = () => {
                           <div key={index} className="comment">
                             <span 
                               className="comment-username" 
-                              onClick={() => handleUserProfile(comment.username)} // Navigate to user profile
+                              onClick={() => handleUserProfile(comment.username)}
                             >
                               {comment.username}
                             </span>

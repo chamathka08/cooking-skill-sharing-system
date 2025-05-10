@@ -33,11 +33,11 @@
   border-radius: 50%;
   overflow: hidden;
   margin-right: 30px;
-  border: 2px solid #daa00e; /* Herb green border */
+  border: 2px solid #daa00e;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #151a22; /* Deep navy fallback */
+  background: #151a22;
   font-size: 3rem;
   color: #f5e8c7;
   font-weight: bold;
@@ -65,6 +65,11 @@
   font-weight: 600;
   color: #161616;
   margin-right: 20px;
+}
+
+.profile-btn-group {
+  display: flex;
+  gap: 10px;
 }
 
 .profile-stats {
@@ -173,6 +178,18 @@
   border: none;
 }
 
+.profile-btn.cancel {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+}
+
+.profile-btn.cancel:hover {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+}
+
 .profile-btn.delete {
   background: #e74c3c;
   color: #fff;
@@ -210,6 +227,13 @@
   border-color: #8a9a5b;
 }
 
+.profile-btn.delete:hover,
+.profile-btn.cancel:hover {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+}
+
 /* Posts Grid */
 .profile-posts {
   width: 100%;
@@ -226,11 +250,11 @@
 .post-item {
   position: relative;
   aspect-ratio: 1;
-  background: rgba(200, 200, 200, 0.85); /* Ash color with transparency */
+  background: rgba(200, 200, 200, 0.85);
   overflow: hidden;
   cursor: pointer;
-  border-radius: 8px; /* Smooth edges */
-  border: 1px solid rgba(219, 219, 219, 0.5); /* Semi-transparent border */
+  border-radius: 8px;
+  border: 1px solid rgba(219, 219, 219, 0.5);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -246,7 +270,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(42, 64, 102, 0.85); /* Adjusted for transparency, matching original color */
+  background: rgba(42, 64, 102, 0.85);
   color: #f5e8c7;
   font-size: 2rem;
   font-weight: bold;
@@ -263,8 +287,8 @@
   font-size: 0.9rem;
   opacity: 0;
   transition: opacity 0.3s ease;
-  max-height: 50%; /* Limit height to avoid overflow */
-  overflow-y: auto; /* Enable scrolling if too many likes/comments */
+  max-height: 50%;
+  overflow-y: auto;
 }
 
 .post-item:hover .post-interactions {
@@ -314,7 +338,7 @@
 
 .comments-list {
   margin-top: 5px;
-  max-height: 80px; /* Adjustable based on design */
+  max-height: 80px;
   overflow-y: auto;
 }
 
@@ -397,6 +421,18 @@
   }
 
   .profile-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile-btn-group {
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+
+  .profile-btn.edit,
+  .profile-btn.cancel {
     width: 100%;
     text-align: center;
   }
