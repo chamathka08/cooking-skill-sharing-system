@@ -214,7 +214,10 @@ const Explore = () => {
     }
   };
 
-  const handleBackToHome = () => navigate('/home');
+  const handleBackToProfile = () => {
+    const currentUserId = localStorage.getItem('userId');
+    navigate(`/profile/${currentUserId}`);
+  };
 
   const handleUserProfile = (targetUserId) => {
     navigate(`/profile/${targetUserId}`);
@@ -228,8 +231,8 @@ const Explore = () => {
           <h1 className="logo-text">FlavorShare</h1>
         </div>
         <nav className="header-nav">
-          <button className="nav-btn back" onClick={handleBackToHome}>
-            Back to Home
+          <button className="nav-btn back" onClick={handleBackToProfile}>
+            Back to profile
           </button>
         </nav>
       </header>
