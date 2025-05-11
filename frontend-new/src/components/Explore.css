@@ -84,7 +84,7 @@
 
 /* Posts Section */
 .posts-section {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -286,7 +286,7 @@
   margin-top: 10px;
   max-height: 200px; /* Fixed height for scrolling */
   overflow-y: auto; /* Enable vertical scrolling */
-  margin-top: auto; /* Push to bottom of post */
+   /* Push to bottom of post */
   padding-right: 5px; /* Space for scrollbar */
 }
 
