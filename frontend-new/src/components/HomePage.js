@@ -60,14 +60,14 @@ const HomePage = () => {
             onChange={handleSearchChange}
           />
           <button className="nav-btn profile" onClick={handleProfile}>
-            My Kitchen
+            profile page
           </button>
           <button className="nav-btn logout" onClick={handleLogout}>
     
-            Leave Table
+            Home page
           </button>
           <button className="nav-btn explore" onClick={handleExploreClick}>
-            Discover Recipes
+            post comment
           </button>
         </nav>
       </header>
