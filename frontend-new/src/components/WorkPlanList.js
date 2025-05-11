@@ -56,12 +56,22 @@ const WorkPlanList = () => {
     navigate(`/workplan/edit/${id}`);
   };
 
+  const handleBack = () => {
+    const currentUserId = localStorage.getItem('userId');
+    navigate(`/profile/${currentUserId}`);
+  };
+
   if (loading) return <div className="loading-spinner">Loading...</div>;
   if (error) return <div className="error-message">{error}</div>;
 
   return (
     <div className="workplan-list-container">
-      <h2>Your Work Plans</h2>
+      <div className="workplan-list-header">
+        <button onClick={handleBack} className="back-btn">
+          <span className="back-arrow">←</span> 
+        </button>
+        <h2>Your Work Plans</h2>
+      </div>
       {workPlans.length > 0 ? (
         <div className="workplans-grid">
           {workPlans.map((plan) => (
@@ -76,7 +86,7 @@ const WorkPlanList = () => {
           ))}
         </div>
       ) : (
-        <p className="no-workplans">No work plans yet appear in here.</p>
+        <p className="no-workplans">No work plans yet.</p>
       )}
     </div>
   );
