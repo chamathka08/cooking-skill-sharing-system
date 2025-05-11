@@ -7,15 +7,17 @@ import './PostEdit.css';
 const PostEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ title: '', description: '' });
+  const [formData, setFormData] = useState({ title: '', description: '', image: '' });
   const [errors, setErrors] = useState({});
+  const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const data = await getPostById(id);
-        setFormData({ title: data.title, description: data.description });
+        setFormData({ title: data.title, description: data.description, image: data.image || '' });
+        setPreview(data.image || null);
         setLoading(false);
       } catch (err) {
         Swal.fire('Error', 'Failed to load post.', 'error');
@@ -38,6 +40,27 @@ const PostEdit = () => {
     setFormData({ ...formData, [name]: value });
     const error = validateField(name, value);
     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 1024 * 1024) {
+        Swal.fire({
+          icon: 'error',
+          title: 'File Too Large',
+          text: 'Please upload an image under 1MB.',
+        });
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const newImage = reader.result; // Base64 string
+        setFormData({ ...formData, image: newImage });
+        setPreview(newImage);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -101,6 +124,17 @@ const PostEdit = () => {
             className={errors.description ? 'error' : ''}
           />
           {errors.description && <p className="error-text">{errors.description}</p>}
+        </div>
+        <div className="form-group">
+          <label htmlFor="image">Image</label>
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+            onChange={handleFileChange}
+            className={errors.image ? 'error' : ''}
+          />
+          {preview && <img src={preview} alt="Preview" className="image-preview" />}
         </div>
         <button type="submit" className="update-btn">Update Post</button>
       </form>
