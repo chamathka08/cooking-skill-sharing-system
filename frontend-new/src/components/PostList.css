@@ -5,6 +5,35 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #c76006 0%, #de8723 100%);
   padding: 40px 20px;
+  position: relative; /* Added to allow absolute positioning of the back button */
+}
+
+.post-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the h2 while allowing absolute positioning for the back button */
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #080808; /* Matches your requested color */
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  position: absolute; /* Position the button absolutely */
+  left: 20px; /* Align to the left side of the page */
+  top: 40px; /* Align to the top, matching the container padding */
+}
+
+
+.back-arrow {
+  font-size: 3.2rem;
 }
 
 .post-list-container h2 {
@@ -129,6 +158,11 @@
     padding: 10px 20px;
     font-size: 0.9rem;
   }
+
+  .back-btn {
+    left: 15px; /* Adjust for smaller screens */
+    top: 30px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -149,5 +183,15 @@
   .delete-btn {
     padding: 10px 20px;
     font-size: 0.9rem;
+  }
+
+  .back-btn {
+    left: 10px; /* Further adjust for very small screens */
+    top: 20px;
+    font-size: 0.9rem; /* Slightly smaller font for small screens */
+  }
+
+  .back-arrow {
+    font-size: 1rem; /* Adjust arrow size for small screens */
   }
 }
